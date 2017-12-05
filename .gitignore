@@ -12,6 +12,8 @@
 logging.fileDir*
 /target/
 **/src/main/resources/static/**
+**/application-local.yaml
+**/application.yaml
 
 **/.DS_Store
 **/node_modules/
