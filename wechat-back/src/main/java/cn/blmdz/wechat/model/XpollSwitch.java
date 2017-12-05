@@ -20,7 +20,7 @@ public class XpollSwitch {
     private Long id;
     private Boolean value;
     @JsonIgnore
-    private String desc;
+    private String remark;
     @JsonIgnore
     private Boolean status;
     @JsonFormat(pattern = Constants.YH, timezone = Constants.TIMEZONE)

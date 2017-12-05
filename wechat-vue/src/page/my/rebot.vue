@@ -24,15 +24,20 @@
     created() {
       var v = this
       console.info("水电费1")
-    //   v.$axios.get('https://cnodejs.org/api/v1/topics')
-    //     .then(r => {
-    //       if (r.data.success) {
-    //         v.lists = r.data.data
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
+      var url = 'http://127.0.0.1:8082/api/s/page'
+      var page = new Object()
+      page.size = 8
+      page.num = 1
+      v.$axios.post(url, page)
+        .then(r => {
+            console.info(r)
+          if (r.data.success) {
+            // v.lists = r.data.data
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 </script>  

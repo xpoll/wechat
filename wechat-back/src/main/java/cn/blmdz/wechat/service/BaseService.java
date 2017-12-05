@@ -29,7 +29,7 @@ public abstract class BaseService<T> {
 	/**
 	 * 分页
 	 */
-	public BasePage<Object, T> page(BasePage<Object, T> base) {
+	public BasePage<?, T> page(BasePage<?, T> base) {
 		
 		PageHelper.startPage(base.getNum(), base.getSize(), base.getOrder());
 		base.setPage(this.getBaseDao().page());
