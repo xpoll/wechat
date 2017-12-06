@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="left">
     <ul class="list">
       <li v-for="item in auths">
         <router-link :to="item.url">{{item.name}}</router-link>
@@ -31,4 +31,12 @@
       ]
     }
   }
-</script>  
+</script>
+
+<style type="text/css" lang="scss">
+ .left {
+    width: 15%;
+    min-width: 150px;
+    float: left;
+ } 
+</style>

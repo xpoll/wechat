@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.blmdz.wechat.dao.SwitchDao">
-	<resultMap id="BaseResultMap" type="cn.blmdz.wechat.model.XpollSwitch">
+<mapper namespace="cn.blmdz.wechat.dao.RebotDao">
+	<resultMap id="BaseResultMap" type="cn.blmdz.wechat.model.XpollRebot">
 		<id column="id" property="id" />
-		<result column="value" property="value" />
+        <result column="type" property="type" />
+        <result column="groups" property="groups" />
+        <result column="link" property="link" />
         <result column="remark" property="remark" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
@@ -15,7 +17,7 @@
 	</sql>
 
 	<sql id="cloums">
-		value, remark, status, create_time, update_time
+		type, groups, link, remark, status, create_time, update_time
 	</sql>
 
 	<sql id="vals_all">
@@ -23,14 +25,14 @@
 	</sql>
 
 	<sql id="vals">
-		true, #{remark}, true, now(), now()
+		#{type}, #{groups}, #{link}, #{remark}, true, now(), now()
 	</sql>
 
 	<sql id="tb">
-		xpoll_switch
+		xpoll_rebot
 	</sql>
 
-	<insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="XpollSwitch">
+	<insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="XpollRebot">
 		insert into
 		<include refid="tb" />
 		(<include refid="cloums" />)
@@ -53,11 +55,13 @@
         where id = #{id}
     </delete>
 
-	<update id="update" parameterType="XpollSwitch">
+	<update id="update" parameterType="XpollRebot">
 		update
 	    <include refid="tb"/>
 		<set>
-		  <if test="value != null">value = #{value},</if>
+          <if test="type != null">type = #{type},</if>
+          <if test="groups != null">groups = #{groups},</if>
+          <if test="link != null">link = #{link},</if>
 		  <if test="remark != null">remark = #{remark},</if>
           update_time = now()
 		</set>

@@ -2,6 +2,19 @@
   <div>
     <xpollHeader></xpollHeader>
     <xpollLeft></xpollLeft>
+    <div class="rebot">
+      <table>
+        <tr>
+          <th>ID</th><th>值</th><th>创建时间</th><th>更新时间</th>
+        </tr>
+        <tr v-for="item in lists">
+          <td v-text="item.id"></td>
+          <td v-text="item.valueDesc"></td>
+          <td v-text="item.createTime"></td>
+          <td v-text="item.updateTime"></td>
+        </tr>
+      </table>
+    </div>
     <xpollFooter></xpollFooter>
   </div>
 </template>
@@ -20,16 +33,28 @@
     },
     created() {
       var v = this
-      console.info("水电费2")
-    //   v.$axios.get('https://cnodejs.org/api/v1/topics')
-    //     .then(r => {
-    //       if (r.data.success) {
-    //         v.lists = r.data.data
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
+      var url = 'http://127.0.0.1:8082/api/s/page'
+      var page = new Object()
+      page.size = 8
+      page.num = 1
+      v.$axios.post(url, page)
+        .then(r => {
+          if (r.data.success) {
+            v.lists = r.data.data.data
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
-</script>  
+</script>
+<style type="text/css" lang="scss">
+  .rebot {
+    width: 85%;
+    float: right;
+    table {
+      width: 80%;
+    }
+  } 
+</style>
