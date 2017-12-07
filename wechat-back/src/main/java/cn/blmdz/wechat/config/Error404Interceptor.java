@@ -1,4 +1,4 @@
-package cn.blmdz.wechat.interceptor;
+package cn.blmdz.wechat.config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +11,8 @@ import cn.blmdz.wechat.base.Constants;
 /**
  * 处理 FileNotFoundException
  * @author yangyz
- * @date 2016年12月2日下午5:08:21
  */
-public class ErrorInterceptor implements HandlerInterceptor {
+public class Error404Interceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

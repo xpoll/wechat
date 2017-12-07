@@ -1,4 +1,4 @@
-package cn.blmdz.wechat.interceptor;
+package cn.blmdz.wechat.config;
 
 import java.io.IOException;
 
@@ -10,11 +10,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PageErrorFilter implements Filter {
+public class PageFilter implements Filter {
 	
 	private Boolean debugger;
 	
-	public PageErrorFilter(Boolean debugger) {
+	public PageFilter(Boolean debugger) {
 		this.debugger = debugger;
 	}
 
