@@ -32,7 +32,7 @@
 		xpoll_rebot
 	</sql>
 
-	<insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="XpollRebot">
+	<insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="cn.blmdz.wechat.model.XpollRebot">
 		insert into
 		<include refid="tb" />
 		(<include refid="cloums" />)
@@ -55,7 +55,7 @@
         where id = #{id}
     </delete>
 
-	<update id="update" parameterType="XpollRebot">
+	<update id="update" parameterType="cn.blmdz.wechat.model.XpollRebot">
 		update
 	    <include refid="tb"/>
 		<set>

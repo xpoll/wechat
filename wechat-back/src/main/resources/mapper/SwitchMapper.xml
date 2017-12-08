@@ -30,7 +30,7 @@
 		xpoll_switch
 	</sql>
 
-	<insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="XpollSwitch">
+	<insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="cn.blmdz.wechat.model.XpollSwitch">
 		insert into
 		<include refid="tb" />
 		(<include refid="cloums" />)
@@ -53,7 +53,7 @@
         where id = #{id}
     </delete>
 
-	<update id="update" parameterType="XpollSwitch">
+	<update id="update" parameterType="cn.blmdz.wechat.model.XpollSwitch">
 		update
 	    <include refid="tb"/>
 		<set>
