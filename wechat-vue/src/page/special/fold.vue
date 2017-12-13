@@ -1,27 +1,27 @@
 <template>
   <div class="accordion">
     <div class="item">
-      <img src="@/@/assets/sp/fold/Location-Pin.png"/>
+      <img src="../../assets/sp/fold/Location-Pin.png"/>
       <h3>Location</h3>
     </div>
     <p style="display: block;">t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
     <div class="item">
-      <img src="@/@/assets/sp/fold/Headphones.png"/>
+      <img src="../../assets/sp/fold/Headphones.png"/>
       <h3>Music</h3>
     </div>
     <p style="display: none;">t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
     <div class="item">
-      <img src="@/@/assets/sp/fold/Lightbulb.png"/>
+      <img src="../../assets/sp/fold/Lightbulb.png"/>
       <h3>Notes</h3>
     </div>
     <p style="display: none;">t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
     <div class="item">
-      <img src="@/@/assets/sp/fold/Bookmarks.png"/>
+      <img src="../../assets/sp/fold/Bookmarks.png"/>
       <h3>Books</h3>
     </div>
     <p style="display: none;">t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
     <div class="item">
-      <img src="@/@/assets/sp/fold/Lightning-Bolt.png"/>
+      <img src="../../assets/sp/fold/Lightning-Bolt.png"/>
       <h3>Tendances</h3>
     </div>
     <p style="display: none;">t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
@@ -118,8 +118,8 @@ body {
 </style>
 
 <script type="text/javascript">
-export default {  
-  // mounted() { 
+export default {
+  // mounted() {
     // $('.item').on("click", function () {
     //   $(this).next().slideToggle(100);
     //   $('p').not($(this).next()).slideUp('fast');

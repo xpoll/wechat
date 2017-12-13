@@ -26,22 +26,31 @@ public class ThirdConfiguration {
         System.out.println(JsonMapper.nonDefaultMapper().toJson(properties));
     }
 
-    public static final String ALIPAY_USER_AUTH_URL = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm";
     public static final String ALIPAY_AUTH_CODE = "auth_code";
+    public static final String ALIPAY_USER_AUTH_URL = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm";
     public static final String ALIPAY_GATEWAY_URL = "https://openapi.alipay.com/gateway.do";
     
-    public static final String BAIDU_GATEWAY_URL = "http://openapi.baidu.com/oauth/2.0/authorize";
+    public static final String BAIDU_AUTH_CODE = "code";
+    public static final String BAIDU_USER_AUTH_URL = "http://openapi.baidu.com/oauth/2.0/authorize";
     public static final String BAIDU_USER_TOKEN_URL = "https://openapi.baidu.com/oauth/2.0/token";
     public static final String BAIDU_USER_INFO = "https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser";
     public static final String BAIDU_AVATAR_PREFIX = "http://himg.bdimg.com/sys/portrait/item/";
     public static final String BAIDU_AVATAR_SUFFIX = ".jpg";
-    public static final String BAIDU_AUTH_CODE = "code";
 
-    public static final String SINA_PREFIX = "http://weibo.com/";
-    public static final String SINA_USER_TOKEN_URL = "https://api.weibo.com/oauth2/access_token";
-    public static final String SINA_USER_AUTH_URL = "https://api.weibo.com/oauth2/authorize";
-    public static final String SINA_USER_INFO = "https://api.weibo.com/2/users/show.json";
     public static final String SINA_AUTH_CODE = "code";
+    public static final String SINA_USER_AUTH_URL = "https://api.weibo.com/oauth2/authorize";
+    public static final String SINA_USER_TOKEN_URL = "https://api.weibo.com/oauth2/access_token";
+    public static final String SINA_USER_INFO = "https://api.weibo.com/2/users/show.json";
+    public static final String SINA_PREFIX = "http://weibo.com/";
+
+    public static final String WECHAT_AUTH_CODE = "code";
+    public static final String WECHAT_USER_AUTH_URL = "https://open.weixin.qq.com/connect/oauth2/authorize";
+    public static final String WECHAT_USER_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token";
+    public static final String WECHAT_USER_INFO_URL = "https://api.weixin.qq.com/sns/userinfo";
+	public static final String WECHAT_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
+	public static final String WECHAT_IP_URL = "https://api.weixin.qq.com/cgi-bin/getcallbackip";
+	public static final String WECHAT_ACCESS_TOKEN_USER_REFRESH_URL = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+	public static final String WECHAT_ACCESS_TOKEN_USER_CHECK_URL = "https://api.weixin.qq.com/sns/auth";
 
     @Bean
     public AlipaySDK getInstance() {

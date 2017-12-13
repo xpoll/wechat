@@ -11,8 +11,8 @@ import com.google.common.collect.Maps;
 import cn.blmdz.wechat.config.ThirdConfiguration;
 import cn.blmdz.wechat.manager.ThirdManager;
 import cn.blmdz.wechat.model.third.ThirdUser;
+import cn.blmdz.wechat.model.third.sina.SinaUser;
 import cn.blmdz.wechat.properties.OtherProperties;
-import cn.blmdz.wechat.sdk.SinaUser;
 import cn.blmdz.wechat.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,8 +36,8 @@ public class SinaThirdManager implements ThirdManager {
 		HttpRequest reqToken = HttpRequest.post(ThirdConfiguration.SINA_USER_TOKEN_URL);
 		reqToken.form(values);
 		if (reqToken.ok()) {
-			
-			values = Maps.newHashMap();
+
+			values.clear();
 			values = JsonMapper.nonEmptyMapper().fromJson(reqToken.body(), Map.class);
 			String access_token = values.get("access_token");
 			String uid = values.get("uid");

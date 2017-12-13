@@ -35,7 +35,7 @@ public class BaiduThirdManager implements ThirdManager {
 		HttpRequest reqToken = HttpRequest.post(ThirdConfiguration.BAIDU_USER_TOKEN_URL);
 		reqToken.form(values);
 		if (reqToken.ok()) {
-			values = Maps.newHashMap();
+			values.clear();
 			values = JsonMapper.nonEmptyMapper().fromJson(reqToken.body(), Map.class);
 			String accessToken = values.get("access_token");
 			values = Maps.newHashMap();

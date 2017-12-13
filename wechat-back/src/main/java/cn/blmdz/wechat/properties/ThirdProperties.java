@@ -8,4 +8,5 @@ public class ThirdProperties {
     private CommonProperties alipay;
     private CommonProperties baidu;
     private CommonProperties sina;
+    private CommonProperties wechat;
 }

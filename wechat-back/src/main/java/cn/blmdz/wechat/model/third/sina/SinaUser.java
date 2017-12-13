@@ -1,7 +1,11 @@
-package cn.blmdz.wechat.sdk;
+package cn.blmdz.wechat.model.third.sina;
 
 import lombok.Data;
 
+/**
+ * 新返回浪用户信息
+ * @author lm
+ */
 @Data
 public class SinaUser {
 	private Long id;

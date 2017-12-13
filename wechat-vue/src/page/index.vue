@@ -1,9 +1,6 @@
 <template>
   <div>
     <xpollHeader></xpollHeader>
-    <h1 class="logo">
-      cnodejs Api Test
-    </h1>
     <ul class="list">
       <li v-for="item in lists">
         <time v-text="$util.getTime(item.create_at)"></time>
@@ -38,4 +35,4 @@
         });
     }
   }
-</script>  
+</script>

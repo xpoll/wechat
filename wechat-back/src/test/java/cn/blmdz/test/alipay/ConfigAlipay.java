@@ -6,6 +6,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.AlipayMarketingCardOpenModel;
 import com.alipay.api.domain.AlipayMarketingCardUpdateModel;
@@ -15,6 +25,7 @@ import com.alipay.api.domain.MerchantCard;
 import com.alipay.api.domain.MerchantMenber;
 import com.alipay.api.internal.util.AlipayLogger;
 
+import cn.blmdz.wechat.WechatBackApplication;
 import cn.blmdz.wechat.sdk.AlipaySDK;
 
 
@@ -31,9 +42,13 @@ import cn.blmdz.wechat.sdk.AlipaySDK;
  * 8. 设置表单信息-update
  * 9. 获取会员卡领卡投放链接-update
  * </pre>
- * 
- * @author yongzongyang
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = WechatBackApplication.class)
+@WebAppConfiguration
+@Transactional
+@Rollback
+@ActiveProfiles("local")
 public class ConfigAlipay {
 	public final static String image_url = "C:\\bg.png";
 
@@ -49,9 +64,11 @@ public class ConfigAlipay {
 	public final static String logo_id = "XR-tC_4jSmO-hE_UrNhp-wAAACMAAQED";
 	public final static String bg_id = "FfviK_x7S6yESp2zyAIZawAAACMAAQED";
 
+	@Autowired
+	AlipaySDK sdk;
 
-	public static void main(String[] args) throws AlipayApiException {
-	    AlipaySDK sdk = AliPayConfig.getInstance();
+	@Test
+	public void main() throws AlipayApiException {
 		AlipayLogger.setJDKDebugEnabled(true);
 //		// 卡模板图标
 //		sdk.upload(new File(image_url));

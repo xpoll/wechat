@@ -40,6 +40,10 @@ public class ThirdController {
 	@Qualifier("baiduThirdManager")
 	private ThirdManager baiduThirdManager;
 
+	@Autowired
+	@Qualifier("wechatThirdManager")
+	private ThirdManager wechatThirdManager;
+
 	private ThirdManager thirdManager;
     
     @Autowired
@@ -51,8 +55,8 @@ public class ThirdController {
 	/**
 	 * 渠道切换
 	 */
-	private void channel(ThirdUser tuser) {
-		switch (tuser.getThird()) {
+	private void channel(ThirdChannel channel) {
+		switch (channel) {
 		case ALIPAY:
 			thirdManager = alipayThirdManager;
 			break;
@@ -64,35 +68,20 @@ public class ThirdController {
 		case BAIDU:
 			thirdManager = baiduThirdManager;
 			break;
-			
+		case WECHAT:
+			thirdManager = wechatThirdManager;
 		default:
 			break;
 		}
 	}
 	
 	/**
-	 * 第三方默认入口
-	 */
-	@RequestMapping
-	public String defaults(HttpServletRequest request, HttpServletResponse response) {
-		map(request);
-		
-		ThirdUser tuser = ThirdUtil.checkCode(request);
-		if (tuser == null) {
-			// 异常
-		}
-		third(request, response, tuser);
-		return null;
-	}
-
-	/**
 	 * 阿里入口
 	 */
 	@RequestMapping(value="/alipay")
 	public String alipay(HttpServletRequest request, HttpServletResponse response) {
 		map(request);
-		ThirdUser tuser = new ThirdUser(ThirdChannel.ALIPAY);
-		third(request, response, tuser);
+		third(request, response, ThirdChannel.ALIPAY);
 		return null;
 	}
 
@@ -102,8 +91,7 @@ public class ThirdController {
 	@RequestMapping(value="/sina")
 	public String sina(HttpServletRequest request, HttpServletResponse response) {
 		map(request);
-		ThirdUser tuser = new ThirdUser(ThirdChannel.SINA);
-		third(request, response, tuser);
+		third(request, response, ThirdChannel.SINA);
 		return null;
 	}
 	
@@ -113,16 +101,26 @@ public class ThirdController {
 	@RequestMapping(value="/baidu")
 	public String baidu(HttpServletRequest request, HttpServletResponse response) {
 		map(request);
-		ThirdUser tuser = new ThirdUser(ThirdChannel.BAIDU);
-		third(request, response, tuser);
+		third(request, response, ThirdChannel.BAIDU);
+		return null;
+	}
+	
+	/**
+	 * 微信入口
+	 */
+	@RequestMapping(value="/wechat")
+	public String wechat(HttpServletRequest request, HttpServletResponse response) {
+		map(request);
+		third(request, response, ThirdChannel.WECHAT);
 		return null;
 	}
 
 	/**
 	 * 入口公共处理
 	 */
-	private void third(HttpServletRequest request, HttpServletResponse response, ThirdUser tuser) {
-		channel(tuser);
+	private void third(HttpServletRequest request, HttpServletResponse response, ThirdChannel channel) {
+		channel(channel);
+		ThirdUser tuser = new ThirdUser(channel);
 		tuser = ThirdUtil.getThirdUserId(request, response, tuser, thirdManager, false, properties);
 		if (tuser == null) return ;
 		
@@ -156,7 +154,7 @@ public class ThirdController {
     @RequestMapping(value="/card")
     public void card(HttpServletRequest request, HttpServletResponse response) {
         map(request);
-        channel(new ThirdUser(ThirdChannel.tran(request.getParameter("out_string"))));
+        channel(ThirdChannel.tran(request.getParameter("out_string")));
         thirdManager.card(request.getParameter("request_id"), request.getParameter("template_id"), request.getParameter("auth_code"));
         try {
             response.sendRedirect(thirdManager.cardLink());

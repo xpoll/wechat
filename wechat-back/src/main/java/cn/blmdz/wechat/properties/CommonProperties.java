@@ -9,6 +9,7 @@ import lombok.Data;
  *  <tr><td>Alipay</td><td>appId privateKey publicKey linkCard</td></tr>
  *  <tr><td>Baidu</td><td>appKey appSecret redirectUrl</td></tr></tr>
  *  <tr><td>Sina</td><td>appKey appSecret redirectUrl</td></tr></tr>
+ *  <tr><td>Sechat</td><td>appId appSecret redirectUrl</td></tr></tr>
  * </table>
  */
 @Data

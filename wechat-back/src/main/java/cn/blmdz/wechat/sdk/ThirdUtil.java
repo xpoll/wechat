@@ -8,20 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 import cn.blmdz.wechat.config.ThirdConfiguration;
-import cn.blmdz.wechat.enums.third.ThirdChannel;
 import cn.blmdz.wechat.manager.ThirdManager;
 import cn.blmdz.wechat.model.third.ThirdUser;
 import cn.blmdz.wechat.properties.OtherProperties;
 
 /**
  * @author yongzongyang
- * @date 2017年6月13日
  */
 public class ThirdUtil {
 
-	// 公共参数
-	public static final String THIRD = "third";
-	
 	/**
 	 * 获取第三方用户ID<br>
 	 * 
@@ -31,7 +26,7 @@ public class ThirdUtil {
 	 * @param response
 	 * @param user 必要基础信息（third、business、type）
 	 * @param thirdPartyManager 设置UserId和AccessToken
-	 * @param session true 走session取，false 不走session取但设置session
+	 * @param session true 走session取，false 不走session取但设置session 未启用
 	 * @return
 	 */
 	public static ThirdUser getThirdUserId(HttpServletRequest request, HttpServletResponse response, ThirdUser tuser, ThirdManager thirdManager, boolean session, OtherProperties properties) {
@@ -54,6 +49,10 @@ public class ThirdUtil {
 			authCode = request.getParameter(ThirdConfiguration.BAIDU_AUTH_CODE);
 			break;
 			
+		case WECHAT:
+			authCode = request.getParameter(ThirdConfiguration.WECHAT_AUTH_CODE);
+			break;
+			
 		default:
 			break;
 		}
@@ -69,18 +68,6 @@ public class ThirdUtil {
 		 * thirdPartyManager设置UserId
 		 */
 		return thirdManager.getThirdUserId(authCode, tuser);
-	}
-	
-	/**
-	 * 校验必要信息
-	 * @param request
-	 * @return
-	 */
-	public static ThirdUser checkCode(HttpServletRequest request) {
-		
-		ThirdChannel thirdChannel = ThirdChannel.tran(request.getParameter(THIRD));
-		
-		return (thirdChannel == null) ? null : new ThirdUser(thirdChannel);
 	}
 	
 	/**
@@ -109,21 +96,27 @@ public class ThirdUtil {
 			break;
 			
 		case BAIDU:
-			sb.append(ThirdConfiguration.BAIDU_GATEWAY_URL)
+			sb.append(ThirdConfiguration.BAIDU_USER_AUTH_URL)
 			.append("?")
 			.append("client_id=")
 			.append(properties.getThird().getBaidu().getAppKey())
 			.append("&scope=basic&display=page&response_type=code");
 			break;
 			
+		case WECHAT:
+			sb.append(ThirdConfiguration.WECHAT_USER_AUTH_URL)
+			.append("?")
+			.append("appid=")
+			.append(properties.getThird().getWechat().getAppId())
+			.append("&response_type=code&scope=snsapi_userinfo");
+			break;
+			
 		default:
 			break;
 		}
-		sb.append("&")
-		.append(THIRD)
-		.append("=")
-		.append(user.getThird().code())
-		.append("&redirect_uri=")
+		sb
+		.append("&")
+		.append("redirect_uri=")
 		.append(url);
 		return sb.toString();
 	}
