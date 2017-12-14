@@ -51,9 +51,8 @@ public class BaiduThirdManager implements ThirdManager {
 				tuser.setThirdUserId(values.get("uid"));
 				return tuser;
 			}
-			log.error("token: {}", reqInfo.body());
 		}
-		log.error("token: {}", reqToken.body());
+        log.error("error get user.");
 		return null;
 	}
 

@@ -19,7 +19,9 @@ import cn.blmdz.wechat.model.third.AlipayUserInfo;
 import cn.blmdz.wechat.model.third.ThirdUser;
 import cn.blmdz.wechat.properties.OtherProperties;
 import cn.blmdz.wechat.sdk.AlipaySDK;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component("alipayThirdManager")
 public class AlipayThirdManager implements ThirdManager {
 
@@ -41,6 +43,7 @@ public class AlipayThirdManager implements ThirdManager {
                 return tuser;
             }
         }
+        log.error("error get user.");
         return null;
     }
 

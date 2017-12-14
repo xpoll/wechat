@@ -10,6 +10,7 @@ import cn.blmdz.wechat.config.ThirdConfiguration;
 import cn.blmdz.wechat.manager.ThirdManager;
 import cn.blmdz.wechat.model.third.ThirdUser;
 import cn.blmdz.wechat.model.third.wechat.WechatUserInfoRequest;
+import cn.blmdz.wechat.model.third.wechat.WechatUserInfoResponse;
 import cn.blmdz.wechat.model.third.wechat.WechatUserTokenRequest;
 import cn.blmdz.wechat.model.third.wechat.WechatUserTokenResponse;
 import cn.blmdz.wechat.properties.OtherProperties;
@@ -26,15 +27,21 @@ public class WechatThirdManager implements ThirdManager {
 
 	@Override
 	public ThirdUser getThirdUserId(String authCode, ThirdUser tuser) {
-		HttpRequest reqToken = HttpRequest.get(ThirdConfiguration.WECHAT_USER_TOKEN_URL, false, new WechatUserTokenRequest(properties, authCode));
+		HttpRequest reqToken = HttpRequest.get(ThirdConfiguration.WECHAT_USER_TOKEN_URL, new WechatUserTokenRequest(properties, authCode), false);
 		if (reqToken.ok()) {
 			WechatUserTokenResponse tokenResponse = JsonMapper.nonEmptyMapper().fromJson(reqToken.body(), WechatUserTokenResponse.class);
 			if (StringUtils.isBlank(tokenResponse.getErrcode())) {
-				HttpRequest reqInfo = HttpRequest.get(ThirdConfiguration.WECHAT_USER_INFO_URL, false, new WechatUserInfoRequest(tokenResponse.getAccess_token(), tokenResponse.getOpenid()));
+				HttpRequest reqInfo = HttpRequest.get(ThirdConfiguration.WECHAT_USER_INFO_URL, new WechatUserInfoRequest(tokenResponse.getAccess_token(), tokenResponse.getOpenid()), false);
+				WechatUserInfoResponse infoResponse = JsonMapper.nonEmptyMapper().fromJson(reqInfo.body(), WechatUserInfoResponse.class);
+				if (reqInfo.ok() && StringUtils.isBlank(infoResponse.getErrcode())) {
+				    tuser.setAvatar(infoResponse.getHeadimgurl());
+				    tuser.setThirdUserId(infoResponse.getOpenid());
+				    tuser.setNick(infoResponse.getNickname());
+				    return tuser;
+				}
 			}
 		}
-		log.error("token: {}", reqToken.body());
-		reqToken.body();
+        log.error("error get user.");
 
 		return null;
 	}

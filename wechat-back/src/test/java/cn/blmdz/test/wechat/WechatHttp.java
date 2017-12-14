@@ -41,11 +41,11 @@ public class WechatHttp {
 		params.put("appid", appid);
 		params.put("secret", secret);
 		params.put("grant_type", "authorization_code");
-		params.put("code", "001biQC123oFEX06AoD12ZK3D12biQC6");
+		params.put("code", "071xPSL11x6DnN1n5bN11KvdM11xPSLf");
 //		get(access_token_user_get_url, params);
 		
-		String user_access_token = "4_bySwiTW2zV_2tJVkZQWhEJgz7IRUFsKv4Mh2LLiZmBskuq8NHCF2cPMtSVTnrBn2FdtVmZ5lbeX-73dXj72iO9ghJiD10aozbBEOwH17rBY";
-		String user_refresh_token = "4_-gS3AOX5t6kE3I7C3w6a4i6v5Y7tUGqhTxfpY5ShD_Hm5nR4cBwjAC6bzTttUiPdCAzuy8n0pml3mnKbwD-sJvskdIQ1MoMH17eb2KSxcKA";
+		String user_access_token = "4_O9WEM-TykeWoawV7qtIhZJgzKjl9CPxRtO26d1qyEekbo5Yt04I7_kZAyMM7bK65au2kWVTWj_DjpDbHNFwQxzqCzXap8JtUQ4tP04_WrVQ";
+		String user_refresh_token = "4_ftvamUlV4AHzvIP4k-wukEKu03GGiUtQ-5gODzdFKgvzU3ZIBq01jq2bBjlLtzuCOnlPu9SWIo5ut519CqVLeRN0CQ_hnDc9fm2-vHfmhJQ";
 		
 		// 刷新access_token（如果需要）
 		params.clear();
@@ -59,13 +59,13 @@ public class WechatHttp {
 		params.put("access_token", user_access_token);
 		params.put("lang", "zh_CN");
 		params.put("openid", "oE0eJ0bp0ZxkXEnzClPEJUDclljg");
-//		get(user_info_url, params);
+		get(user_info_url, params);
 		
 		// 检验授权凭证（access_token）是否有效
 		params.clear();
 		params.put("access_token", user_access_token);
 		params.put("openid", "oE0eJ0bp0ZxkXEnzClPEJUDclljg");
-		get(access_token_user_check_url, params);
+//		get(access_token_user_check_url, params);
 	}
 
 	public static void get(String url, Map<String, String> params) {

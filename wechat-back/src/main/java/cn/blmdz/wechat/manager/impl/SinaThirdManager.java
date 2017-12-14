@@ -57,9 +57,9 @@ public class SinaThirdManager implements ThirdManager {
 				tuser.setUrl(suser.getProfile_url());
 				return tuser;
 			}
-			log.error("token: {}", reqInfo.body());
 		}
-		log.error("token: {}", reqToken.body());
+
+        log.error("error get user.");
 		return null;
 	}
 
