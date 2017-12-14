@@ -29,20 +29,20 @@
 </template>
 
 <style type="text/css" lang="scss">
-body {
-  background: #f6704b;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
 
 .accordion {
   margin: 50px auto;
   width: 380px;
   background: #ccc;
   cursor: pointer;
+  body {
+    background: #f6704b;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
 }
 .accordion .item {
   height: 100px;

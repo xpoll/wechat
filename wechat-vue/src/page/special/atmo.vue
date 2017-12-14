@@ -1,28 +1,25 @@
 <template>
-  <div>
-    <canvas id="canvas" width="819" height="990"></canvas>
+  <div class="atmo">
+    <canvas id="canvas"></canvas>
   </div>
 </template>
 
 <style type="text/css" lang="scss">
-  html,body{
-  margin:0px;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#000;
+.atmo {
+  body{
+    background:#000;
+  }
   #canvas{
     position:absolute;
     width:100%;
     height:100%;
   }
 }
-
 </style>
 
 <script type="text/javascript">
-export default {  
-  mounted() { 
+export default {
+  mounted() {
     var pt,x,y,z,size,d;
     pt = this.pt;
     x = this.x;
@@ -90,7 +87,7 @@ export default {
 
 
     function interpolateColors(RGB1,RGB2,degree){
-      
+
       var w2=degree;
       var w1=1-w2;
       return [w1*RGB1[0]+w2*RGB2[0],w1*RGB1[1]+w2*RGB2[1],w1*RGB1[2]+w2*RGB2[2]];
@@ -121,7 +118,7 @@ export default {
 
       if(vars.points.length<vars.initParticles) for(var i=0;i<5;++i) spawnParticle(vars);
       var p,d,t;
-      
+
       p = Math.atan2(vars.camX, vars.camZ);
       d = Math.sqrt(vars.camX * vars.camX + vars.camZ * vars.camZ);
       d -= Math.sin(vars.frameNo / 80) / 25;
@@ -131,10 +128,10 @@ export default {
       vars.camY = -Math.sin(vars.frameNo / 220) * 15;
       vars.yaw = Math.PI + p + t;
       vars.pitch = elevation(vars.camX, vars.camZ, vars.camY) - Math.PI / 2;
-      
+
       var t;
       for(var i=0;i<vars.points.length;++i){
-        
+
         x=vars.points[i].x;
         y=vars.points[i].y;
         z=vars.points[i].z;
@@ -152,7 +149,7 @@ export default {
     }
 
     function drawFloor(vars){
-      
+
       var x,y,z,d,point,a;
       for (var i = -25; i <= 25; i += 1) {
         for (var j = -25; j <= 25; j += 1) {
@@ -171,7 +168,7 @@ export default {
             }
           }
         }
-      }   
+      }
       vars.ctx.fillStyle = "#82f";
       for (var i = -25; i <= 25; i += 1) {
         for (var j = -25; j <= 25; j += 1) {
@@ -190,7 +187,7 @@ export default {
             }
           }
         }
-      }   
+      }
     }
 
     function sortFunction(a,b){
@@ -202,9 +199,9 @@ export default {
       vars.ctx.globalAlpha=.15;
       vars.ctx.fillStyle="#000";
       vars.ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
+
       drawFloor(vars);
-      
+
       var point,x,y,z,a;
       for(var i=0;i<vars.points.length;++i){
         x=vars.points[i].x;
@@ -237,7 +234,7 @@ export default {
       pt.z=Math.cos(p)*ls;
       pt.radius=200+800*Math.random();
       pt.color=pt.radius/1000+vars.frameNo/250;
-      vars.points.push(pt); 
+      vars.points.push(pt);
     }
 
     function frame(vars) {
@@ -247,7 +244,7 @@ export default {
         vars.canvas = document.querySelector("canvas");
         vars.ctx = vars.canvas.getContext("2d");
         vars.canvas.width = document.body.clientWidth;
-        vars.canvas.height = document.body.clientHeight;
+        vars.canvas.height = document.documentElement.clientHeight;
         window.addEventListener("resize", function(){
           vars.canvas.width = document.body.clientWidth;
           vars.canvas.height = document.body.clientHeight;
